@@ -2,13 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import UserView from './components/user-view';
 import StandardView from './components/user-view';
-import CalendarContainer from './components/calendar-container';
-import EventDetails from './components/event-details'
 import { useCookies } from 'react-cookie';
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
-import Tooltip from '@material-ui/core/Tooltip';
-import SvgIcon from '@material-ui/icons/Person';
 
 function App() {
 
@@ -29,6 +23,11 @@ function App() {
     .then( resp => formatEvents(resp))
     .catch( error => console.log(error) )
   }, [])
+
+  useEffect( () => {
+    console.log(token);
+    // if(!token['mr-token']) window.location.href = '/';
+  }, [token])
 
   const formatEvents = (events) => {
     const formattedEvents = events.map(event => {
@@ -109,9 +108,9 @@ function App() {
 
     <div>
       { token['cc-token'] ?
-        <UserView selectedEvent={selectedEvent} events={events} visible={visible} updateEvents={updateEvents} createEvent={createEvent} login={login} logout={logout} closeDetails={closeDetails} openDetails={openDetails} eventCreated={eventCreated} />
+        (<UserView setSelectedEvent={setSelectedEvent} selectedEvent={selectedEvent} events={events} visible={visible} updateEvents={updateEvents} createEvent={createEvent} login={login} logout={logout} closeDetails={closeDetails} openDetails={openDetails} eventCreated={eventCreated} />)
         :
-        <StandardView selectedEvent={selectedEvent} events={events} visible={visible} updateEvents={updateEvents} createEvent={createEvent} login={login} logout={logout} closeDetails={closeDetails} openDetails={openDetails} eventCreated={eventCreated} />
+        (<StandardView setSelectedEvent={setSelectedEvent} selectedEvent={selectedEvent} events={events} visible={visible} updateEvents={updateEvents} createEvent={createEvent} login={login} logout={logout} closeDetails={closeDetails} openDetails={openDetails} eventCreated={eventCreated} />)
       }
     </div>
   );

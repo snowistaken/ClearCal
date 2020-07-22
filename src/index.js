@@ -14,7 +14,7 @@ ReactDOM.render(
         <BrowserRouter>
           <Route exact path="/auth" component={Auth} />
           <Route exact path="/create-event" component={EventForm} />
-          <Route exact path="/calendar" component={App} />
+          <Route exact path="/" component={App} />
         </BrowserRouter>
       </CookiesProvider>
   </React.StrictMode>,
