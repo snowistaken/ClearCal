@@ -1,4 +1,4 @@
-
+const TOKEN = '71722537cba5568966954fe791c1d1556b3f9dad';
 
 export default class API {
   static updateEvent(event_id, body) {

@@ -9,7 +9,7 @@ function CalendarContainer(props) {
 
   const onSelectedEvent = selectedEvent => {
     props.setSelectedEvent(selectedEvent)
-    props.setOpen(true)
+    props.openDetails(true)
   }
 
   return (

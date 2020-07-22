@@ -2,9 +2,13 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import CalendarContainer from './components/calendar-container';
 import EventForm from './components/event-form'
+import EventDetails from './components/event-details'
 import './react-slide-out/src/index.css';
 import SimpleSlider from './react-slide-out/src/index.jsx';
-import { useCookies } from 'react-cookie'
+import { useCookies } from 'react-cookie';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
+import Tooltip from '@material-ui/core/Tooltip';
 
 function App() {
 
@@ -12,7 +16,7 @@ function App() {
 
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [events, setEvents] = useState([]);
-  const [isOpen, setOpen] = useState(false)
+  const [ visible, setVisible ] = useState(false)
 
   useEffect(() => {
     fetch("http://127.0.0.1:8000/api/events/", {
@@ -59,9 +63,13 @@ function App() {
     window.prompt('You clicked the other button!')
   }
 
-  const closeSlider = () => {
-    setOpen(false)
+  const closeDetails = () => {
+    setVisible(false)
     setSelectedEvent(null)
+  }
+
+  const openDetails = () => {
+    setVisible(true)
   }
 
   const eventCreated = newEvent => {
@@ -73,36 +81,14 @@ function App() {
     // <React.Fragment className='App'>
       <div className='layout'>
         <button className='button, login' onClick={() => login()} >Log In</button>
-        <button className='button, calendar-buttons' onClick={createEvent} >Create New Event</button>
-        <CalendarContainer setSelectedEvent={setSelectedEvent} setOpen={setOpen} events={events}/>
-          { selectedEvent ? (
-            <SimpleSlider
-              title={selectedEvent.title}
-              footer={
-              <div style={{padding: '15px'}}>
-                <button onClick={() => closeSlider()}>Close Slider</button>
-              </div>
-              }
-            isOpen={isOpen}
-            onOutsideClick={() => (closeSlider())}>
-            <div>
-              Start: {selectedEvent.start.toString()} - End: {selectedEvent.end.toString()}
-              <EventForm eventToEdit={selectedEvent} updateEvents={updateEvents} eventCreated={eventCreated}/> 
-            </div>
-          </SimpleSlider>
-          ) : 
-          <SimpleSlider
-            width={0}
-            title='null'
-            footer={
-            <div style={{padding: '15px'}}>
-              <button onClick={() => closeSlider()}>Close Slider</button>
-            </div>
-            }
-            isOpen={isOpen}
-            onOutsideClick={() => (closeSlider())}>
-            <div>null</div>
-          </SimpleSlider> }
+        {/* <button className='button, calendar-buttons' onClick={createEvent} >Create New Event</button> */}
+        <Tooltip title='Create Event'>
+          <Fab color="primary" aria-label="add" className='calendar-buttons' size='medium'>
+            <AddIcon onClick={createEvent}/>
+          </Fab>
+        </Tooltip>
+        <CalendarContainer setSelectedEvent={setSelectedEvent} openDetails={openDetails} events={events}/>
+        <EventDetails closeDetails={closeDetails} visible={visible}></EventDetails>
       </div>
     // </React.Fragment>
   );
