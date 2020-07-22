@@ -11,7 +11,7 @@ import SvgIcon from '@material-ui/icons/Person';
 
 function App() {
 
-  const [ token, setToken ] = useCookies(['cc-token']);
+  const [ token ] = useCookies(['cc-token']);
 
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [events, setEvents] = useState([]);
@@ -56,7 +56,7 @@ function App() {
   }
 
   const createEvent = () => {
-    window.prompt('You clicked the button!')
+    window.location.href = '/create-event'
   }
 
   const login = () => {
@@ -80,14 +80,21 @@ function App() {
   return (
     // <React.Fragment className='App'>
       <div className='layout'>
-        <Fab variant="extended" className='login' size='medium'>
-          <SvgIcon onClick={login}/>
-            Login
-        </Fab>
+        { token['cc-token'] ?
+          <Fab variant="extended" className='login' size='medium' onClick={login}>
+            <SvgIcon />
+              Logout
+          </Fab>
+          :
+          <Fab variant="extended" className='login' size='medium' onClick={login}>
+            <SvgIcon />
+              Login
+          </Fab>
+        }
         {/* <button className='button, calendar-buttons' onClick={createEvent} >Create New Event</button> */}
         <Tooltip title='Create Event'>
-          <Fab color="primary" aria-label="add" className='calendar-buttons' size='medium'>
-            <AddIcon onClick={createEvent}/>
+          <Fab color="primary" aria-label="add" className='calendar-buttons' size='medium' onClick={createEvent}>
+            <AddIcon />
           </Fab>
         </Tooltip>
         <CalendarContainer setSelectedEvent={setSelectedEvent} openDetails={openDetails} events={events}/>
