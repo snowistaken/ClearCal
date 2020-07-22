@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import UserView from './components/user-view';
+import StandardView from './components/user-view';
 import CalendarContainer from './components/calendar-container';
-import EventForm from './components/event-form'
 import EventDetails from './components/event-details'
 import { useCookies } from 'react-cookie';
 import Fab from '@material-ui/core/Fab';
@@ -13,8 +14,8 @@ function App() {
 
   const [ token ] = useCookies(['cc-token']);
 
-  const [selectedEvent, setSelectedEvent] = useState(null);
-  const [events, setEvents] = useState([]);
+  const [ selectedEvent, setSelectedEvent ] = useState(null);
+  const [ events, setEvents ] = useState([]);
   const [ visible, setVisible ] = useState(false)
 
   useEffect(() => {
@@ -63,6 +64,10 @@ function App() {
     window.location.href = '/auth'
   }
 
+  const logout = () => {
+    console.log('logout')
+  }
+
   const closeDetails = () => {
     setVisible(false)
     setSelectedEvent(null)
@@ -79,28 +84,36 @@ function App() {
 
   return (
     // <React.Fragment className='App'>
-      <div className='layout'>
-        { token['cc-token'] ?
-          <Fab variant="extended" className='login' size='medium' onClick={login}>
-            <SvgIcon />
-              Logout
-          </Fab>
-          :
-          <Fab variant="extended" className='login' size='medium' onClick={login}>
-            <SvgIcon />
-              Login
-          </Fab>
-        }
-        {/* <button className='button, calendar-buttons' onClick={createEvent} >Create New Event</button> */}
-        <Tooltip title='Create Event'>
-          <Fab color="primary" aria-label="add" className='calendar-buttons' size='medium' onClick={createEvent}>
-            <AddIcon />
-          </Fab>
-        </Tooltip>
-        <CalendarContainer setSelectedEvent={setSelectedEvent} openDetails={openDetails} events={events}/>
-        <EventDetails closeDetails={closeDetails} visible={visible} event={selectedEvent}></EventDetails>
-      </div>
+      // <div className='layout'>
+      //   { token['cc-token'] ?
+      //     <Fab variant="extended" className='login' size='medium' onClick={login}>
+      //       <SvgIcon />
+      //         Logout
+      //     </Fab>
+      //     :
+      //     <Fab variant="extended" className='login' size='medium' onClick={login}>
+      //       <SvgIcon />
+      //         Login
+      //     </Fab>
+      //   }
+      //   {/* <button className='button, calendar-buttons' onClick={createEvent} >Create New Event</button> */}
+      //   <Tooltip title='Create Event'>
+      //     <Fab color="primary" aria-label="add" className='calendar-buttons' size='medium' onClick={createEvent}>
+      //       <AddIcon />
+      //     </Fab>
+      //   </Tooltip>
+      //   <CalendarContainer setSelectedEvent={setSelectedEvent} openDetails={openDetails} events={events}/>
+      //   <EventDetails closeDetails={closeDetails} visible={visible} event={selectedEvent}></EventDetails>
+      // </div>
     // </React.Fragment>
+
+    <div>
+      { token['cc-token'] ?
+        <UserView selectedEvent={selectedEvent} events={events} visible={visible} updateEvents={updateEvents} createEvent={createEvent} login={login} logout={logout} closeDetails={closeDetails} openDetails={openDetails} eventCreated={eventCreated} />
+        :
+        <StandardView selectedEvent={selectedEvent} events={events} visible={visible} updateEvents={updateEvents} createEvent={createEvent} login={login} logout={logout} closeDetails={closeDetails} openDetails={openDetails} eventCreated={eventCreated} />
+      }
+    </div>
   );
 }
 
