@@ -1,53 +1,39 @@
 import React, { useState, useEffect } from 'react';
+import '../styles/event-details.css'
 import Modal from 'react-awesome-modal';
-
-// export default class EventDetails extends Component {
-//     constructor(props) {
-//         super(props);
-//         this.state = {
-//             visible : false
-//         }
-//     }
-
-//     openModal() {
-//         this.setState({
-//             visible : true
-//         });
-//     }
-
-//     closeModal() {
-//         this.setState({
-//             visible : false
-//         });
-//     }
-
-//     render() {
-//         return (
-//             <section>
-//                 <h1>React-Modal Examples</h1>
-//                 <input type="button" value="Open" onClick={() => this.openModal()} />
-//                 <Modal visible={this.state.visible} width="400" height="300" effect="fadeInUp" onClickAway={() => this.closeModal()}>
-//                     <div>
-//                         <h1>Title</h1>
-//                         <p>Some Contents</p>
-//                         <button onClick={() => this.closeModal()}>Close</button>
-//                     </div>
-//                 </Modal>
-//             </section>
-//         );
-//     }
-// }
+import Fab from '@material-ui/core/Fab';
+import Tooltip from '@material-ui/core/Tooltip';
+import Close from '@material-ui/icons/Close';
+import Edit from '@material-ui/icons/Edit';
+import IconButton from '@material-ui/core/IconButton';
 
 function EventDetails(props) {
 
   return (
-    <Modal visible={props.visible} width="400" height="300" effect="fadeInUp" onClickAway={() => props.closeDetails()}>
-      <div>
-          <h1>Title</h1>
-          <p>Some Contents</p>
-          <button onClick={() => this.closeModal()}>Close</button>
-      </div>
-    </Modal>
+    <div className='event-details'>
+      { props.event ? 
+        (<Modal visible={props.visible} width="400" height="300" effect="fadeInUp" onClickAway={() => props.closeDetails()}>
+          
+            <Tooltip text='Close'>
+              <IconButton aria-label="close window" component="span" className='close-button' size='small' onClick={() => props.closeDetails()}>
+                <Close />
+              </IconButton>
+            </Tooltip>
+            
+          <div style={{'margin-left': '15px'}}>
+            <h3>Title: {props.event.title}</h3>
+            <p>
+              Details: {props.event.description}<br/>
+              From: {props.event.start.toString()}<br/>
+              To: {props.event.end.toString()}<br/>
+            </p>
+          </div>
+            <Fab color="secondary" aria-label="edit" size='small'>
+              <Edit />
+            </Fab>
+        </Modal>) : null
+      }
+    </div>
   )
 }
 

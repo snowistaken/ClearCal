@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import Auth from './components/auth'
 import * as serviceWorker from './serviceWorker';
 import { Route, BrowserRouter } from 'react-router-dom'
 import { CookiesProvider } from 'react-cookie'
@@ -9,8 +10,11 @@ import { CookiesProvider } from 'react-cookie'
 ReactDOM.render(
   <React.StrictMode>
     <CookiesProvider>
-      <App />
-    </CookiesProvider>
+        <BrowserRouter>
+          <Route exact path="/auth" component={Auth} />
+          <Route exact path="/calendar" component={App} />
+        </BrowserRouter>
+      </CookiesProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

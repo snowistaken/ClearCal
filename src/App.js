@@ -7,6 +7,7 @@ import { useCookies } from 'react-cookie';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import Tooltip from '@material-ui/core/Tooltip';
+import SvgIcon from '@material-ui/icons/Person';
 
 function App() {
 
@@ -33,6 +34,7 @@ function App() {
       return ({
         id: event.id,
         title: event.title,
+        description: event.title,
         allDay: false,
         start: new Date (event.start),
         end: new Date (event.end)
@@ -58,7 +60,7 @@ function App() {
   }
 
   const login = () => {
-    window.prompt('You clicked the other button!')
+    window.location.href = '/auth'
   }
 
   const closeDetails = () => {
@@ -78,7 +80,10 @@ function App() {
   return (
     // <React.Fragment className='App'>
       <div className='layout'>
-        <button className='button, login' onClick={() => login()} >Log In</button>
+        <Fab variant="extended" className='login' size='medium'>
+          <SvgIcon onClick={login}/>
+            Login
+        </Fab>
         {/* <button className='button, calendar-buttons' onClick={createEvent} >Create New Event</button> */}
         <Tooltip title='Create Event'>
           <Fab color="primary" aria-label="add" className='calendar-buttons' size='medium'>
@@ -86,7 +91,7 @@ function App() {
           </Fab>
         </Tooltip>
         <CalendarContainer setSelectedEvent={setSelectedEvent} openDetails={openDetails} events={events}/>
-        <EventDetails closeDetails={closeDetails} visible={visible}></EventDetails>
+        <EventDetails closeDetails={closeDetails} visible={visible} event={selectedEvent}></EventDetails>
       </div>
     // </React.Fragment>
   );
