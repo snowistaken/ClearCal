@@ -3,8 +3,6 @@ import './App.css';
 import CalendarContainer from './components/calendar-container';
 import EventForm from './components/event-form'
 import EventDetails from './components/event-details'
-import './react-slide-out/src/index.css';
-import SimpleSlider from './react-slide-out/src/index.jsx';
 import { useCookies } from 'react-cookie';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
