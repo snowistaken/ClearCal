@@ -6,13 +6,15 @@ import { useCookies } from 'react-cookie';
 
 function App() {
 
-  const [ token, setToken, deleteToken ] = useCookies(['cc-token']);
-  const [ userId, setUserId, deleteUserId ] = useCookies(['cc-user-id']);
+  const tokenCookie = useCookies(['cc-token']);
+  const token = tokenCookie[0]
+  const deleteToken = tokenCookie[2]
+  const deleteUserId  = useCookies(['cc-user-id'])[2];
 
   const [ selectedEvent, setSelectedEvent ] = useState(null);
   const [ events, setEvents ] = useState([]);
-  const [ visible, setVisible ] = useState(false)
-  const [ userView, setUserView ] = useState(false)
+  const [ visible, setVisible ] = useState(false);
+  const [ userView, setUserView ] = useState(false);
 
   useEffect(() => {
     fetch("http://127.0.0.1:8000/api/events/", {
@@ -24,7 +26,7 @@ function App() {
     .then( resp => resp.json())
     .then( resp => formatEvents(resp))
     .catch( error => console.log(error) )
-  }, [])
+  }, []);
 
   useEffect( () => {
 
@@ -33,7 +35,7 @@ function App() {
     else
       setUserView(false);
   
-  }, [token])
+  }, [token]);
 
   const formatEvents = (events) => {
     const formattedEvents = events.map(event => {
@@ -79,30 +81,6 @@ function App() {
   }
 
   return (
-    // <React.Fragment className='App'>
-      // <div className='layout'>
-      //   { token['cc-token'] ?
-      //     <Fab variant="extended" className='login' size='medium' onClick={login}>
-      //       <SvgIcon />
-      //         Logout
-      //     </Fab>
-      //     :
-      //     <Fab variant="extended" className='login' size='medium' onClick={login}>
-      //       <SvgIcon />
-      //         Login
-      //     </Fab>
-      //   }
-      //   {/* <button className='button, calendar-buttons' onClick={createEvent} >Create New Event</button> */}
-      //   <Tooltip title='Create Event'>
-      //     <Fab color="primary" aria-label="add" className='calendar-buttons' size='medium' onClick={createEvent}>
-      //       <AddIcon />
-      //     </Fab>
-      //   </Tooltip>
-      //   <CalendarContainer setSelectedEvent={setSelectedEvent} openDetails={openDetails} events={events}/>
-      //   <EventDetails closeDetails={closeDetails} visible={visible} event={selectedEvent}></EventDetails>
-      // </div>
-    // </React.Fragment>
-
     <div>
       { userView ?
         (<UserView setEvents={setEvents} setSelectedEvent={setSelectedEvent} selectedEvent={selectedEvent} events={events} visible={visible} createEvent={createEvent} login={login} logout={logout} closeDetails={closeDetails} openDetails={openDetails} eventCreated={eventCreated} userView={userView} />)
@@ -111,6 +89,6 @@ function App() {
       }
     </div>
   );
-}
+};
 
 export default App;
