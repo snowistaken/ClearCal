@@ -68,8 +68,6 @@ function EventDetails(props) {
           <div style={{'margin-left': '15px'}}>
             <h3>Title: {props.event.title}</h3>
             <p>
-              {/* Organizer: {String(props.event.organizer)}<br/>
-              User ID: {String(userId['cc-user-id'])}<br/> */}
               From: {props.event.start.toString()}<br/>
               To: {props.event.end.toString()}<br/>
               Details: {props.event.description}<br/>
@@ -90,7 +88,6 @@ function EventDetails(props) {
               }
             </div>) 
             : <></>}
-
         </Modal>) 
         : null
       }

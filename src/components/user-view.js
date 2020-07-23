@@ -24,7 +24,6 @@ function UserView(props) {
   }
 
   return (
-    // <React.Fragment className='App'>
       <div className='layout'>
         <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/public-sans" type="text/css"/>
         <div className='app-header'>ClearCal</div>
@@ -39,7 +38,6 @@ function UserView(props) {
               Login
           </Fab>
         }
-        {/* <button className='button, calendar-buttons' onClick={createEvent} >Create New Event</button> */}
         <Tooltip title='Create Event'>
           <Fab color="primary" aria-label="add" className='calendar-buttons' size='medium' onClick={props.createEvent}>
             <AddIcon />
@@ -48,7 +46,6 @@ function UserView(props) {
         <CalendarContainer setSelectedEvent={props.setSelectedEvent} openDetails={props.openDetails} events={props.events}/>
         <EventDetails updateEvents={updateEvents} userView={props.userView} closeDetails={props.closeDetails} visible={props.visible} event={props.selectedEvent}></EventDetails>
       </div>
-    // </React.Fragment>
   );
 }
 

@@ -13,7 +13,6 @@ function CalendarContainer(props) {
   }
 
   return (
-    <>
       <Calendar
         popup
         selectable
@@ -22,10 +21,8 @@ function CalendarContainer(props) {
         defaultView={Views.MONTH}
         scrollToTime={new Date(1970, 1, 1, 6)}
         onSelectEvent={event => onSelectedEvent(event)}
-        // style={{ minHeight: '100vh' }}
         className='calendar'
       />
-    </>
   )
 }
 
