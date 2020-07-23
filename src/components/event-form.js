@@ -14,9 +14,13 @@ function EventForm(props) {
   const [ end, setEnd ] = useState('');
 
   useEffect( () => {
-    if (props.eventToEdit)
-      setTitle(props.eventToEdit.title)
-      setDescription(props.eventToEdit.description)
+    if (!props.eventToEdit)
+      {setTitle('')
+      setDescription('')}
+    else
+      {setTitle(props.eventToEdit.title)
+      setDescription(props.eventToEdit.description)};
+
   }, [props.eventToEdit])
 
   const updateClicked = () => {
@@ -28,12 +32,12 @@ function EventForm(props) {
   const createClicked = () => {
     API.createEvent({title, description, all_day: false, start, end, organizer: '1', shifts:[]}, token['cc-token'])
     .then( resp => console.log(resp))
-    .then( window.location.href = '/calendar' )
+    .then( window.location.href = '/' )
     .catch( error => console.log(error))
   }
 
   return (
-    <React.Fragment>
+    <div>
       { props.eventToEdit ? (
         <div>
           <label htmlFor="title">Title</label><br/>
@@ -68,7 +72,7 @@ function EventForm(props) {
           <button onClick={createClicked}>Add</button>
         </div>
       }
-      </React.Fragment>
+      </div>
     )
 }
 

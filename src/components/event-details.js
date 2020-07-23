@@ -57,14 +57,14 @@ function EventDetails(props) {
   }
 
   return (
-    <div className='event-details'>
+    <div className='event-details' style={{width: '0px'}} >
       { props.event ? 
         (<Modal visible={props.visible} width="400" height="300" effect="fadeInUp" onClickAway={() => closeDetails()}  className='event-details'>
 
           <IconButton aria-label="close window" component="span" className='close-button' size='small' onClick={() => props.closeDetails()}>
             <Close />
           </IconButton>
-          
+
           <div style={{'margin-left': '15px'}}>
             <h3>Title: {props.event.title}</h3>
             <p>

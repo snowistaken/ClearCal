@@ -69,3 +69,23 @@
 .layout .calendar-buttons:hover{
   background-color: lightskyblue;
 }
+
+.layout .app-header{
+  font-weight: bolder;
+  font-size: 35px;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  margin-top: 28px;
+  margin-right: 40px;
+  text-align: center;
+  font-family: 'PublicSansRegular';
+  font-weight: bolder;
+  font-style: normal;
+  color: rgb(50, 52, 53);
+  height: 46px;
+  background-color: rgba(241, 243, 244, 0.701);
+  border-radius: 15px;
+  max-width: 30%;
+}

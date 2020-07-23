@@ -6,10 +6,9 @@ function Auth(){
 
   const [ username, setUsername ] = useState('');
   const [ password, setPassword ] = useState('');
-  const [ isLoginView, setIsLoginView ] = useState(true);
 
   const [ token, setToken ] = useCookies(['cc-token']);
-  const [ userId, setUserId ] = useCookies(['cc-user-id']);
+  const [ setUserId ] = useCookies(['cc-user-id']);
 
   useEffect( () => {
     console.log(token);

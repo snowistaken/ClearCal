@@ -9,16 +9,16 @@ import { Route, BrowserRouter } from 'react-router-dom'
 import { CookiesProvider } from 'react-cookie'
 
 ReactDOM.render(
-  <React.StrictMode>
-    <CookiesProvider>
-        <BrowserRouter>
-          <Route exact path="/auth" component={Auth} />
-          <Route exact path="/create-event" component={EventForm} />
-          <Route exact path="/" component={App} />
-        </BrowserRouter>
-      </CookiesProvider>
-  </React.StrictMode>,
-  document.getElementById('root')
+    <React.StrictMode>
+      <CookiesProvider>
+          <BrowserRouter>
+            <Route exact path="/auth" component={Auth} />
+            <Route exact path="/create-event" component={EventForm} />
+            <Route exact path="/" component={App} />
+          </BrowserRouter>
+        </CookiesProvider>
+    </React.StrictMode>,
+    document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change

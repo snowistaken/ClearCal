@@ -12,6 +12,8 @@ function UserView(props) {
 
   return (
       <div className='layout'>
+        <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/public-sans" type="text/css"/>
+        <div className='app-header'><em>Clear</em>Cal</div>
       { token['cc-token'] ?
         <Fab variant="extended" className='login' size='medium' onClick={props.login}>
           <SvgIcon />

@@ -26,6 +26,8 @@ function UserView(props) {
   return (
     // <React.Fragment className='App'>
       <div className='layout'>
+        <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/public-sans" type="text/css"/>
+        <div className='app-header'>ClearCal</div>
         { token['cc-token'] ?
           <Fab variant="extended" className='login' size='medium' onClick={props.logout}>
             <SvgIcon />
