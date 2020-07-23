@@ -7,7 +7,6 @@ import EventForm from './event-form';
 import '../styles/event-details.css';
 import Modal from 'react-awesome-modal';
 import Fab from '@material-ui/core/Fab';
-import Tooltip from '@material-ui/core/Tooltip';
 import Close from '@material-ui/icons/Close';
 import Edit from '@material-ui/icons/Edit';
 import Delete from '@material-ui/icons/Delete'

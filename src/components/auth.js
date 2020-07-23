@@ -8,7 +8,7 @@ function Auth(){
   const [ password, setPassword ] = useState('');
 
   const [ token, setToken ] = useCookies(['cc-token']);
-  const [ setUserId ] = useCookies(['cc-user-id']);
+  const [ userId, setUserId ] = useCookies(['cc-user-id']);
 
   useEffect( () => {
     console.log(token);
