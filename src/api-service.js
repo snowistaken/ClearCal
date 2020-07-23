@@ -22,13 +22,14 @@ export default class API {
     }).then( resp => resp.json())
   }
 
-  static deleteEvent(event_id, token) {
+  static deleteEvent(event_id, token, body) {
     return fetch(`http://127.0.0.1:8000/api/events/${event_id}/`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Token ${token}`
       },
+      body: JSON.stringify( body )
     })
   }
 

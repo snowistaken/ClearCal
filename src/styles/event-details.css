@@ -1,6 +1,7 @@
 .event-details{
-  overflow: hidden;
-  position: relative
+  overflow: scroll;
+  position: absolute;
+  z-index: 5;
 }
 
 .close-button{
@@ -10,12 +11,12 @@
   float: right;
 }
 
-.trash-button{
+.edit-button{
   position: fixed;
   float: right;
 }
 
-.edit-button{
+.trash-button{
   position: fixed;
   float: right;
 }

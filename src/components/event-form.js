@@ -6,6 +6,7 @@ import { useCookies } from 'react-cookie'
 function EventForm(props) {
  
   const [ token ] = useCookies(['cc-token']);
+  const [ userId ] = useCookies(['cc-user-id']);
 
   const [ title, setTitle ] = useState('');
   const [ description, setDescription ] = useState('');
@@ -19,7 +20,7 @@ function EventForm(props) {
   }, [props.eventToEdit])
 
   const updateClicked = () => {
-    API.updateEvent(props.eventToEdit.id, {title: title, description: description, all_day: false, start: props.eventToEdit.start, end: props.eventToEdit.end, organizer: '1', shifts:[]}, token['cc-token'])
+    API.updateEvent(props.eventToEdit.id, {title: title, description: description, all_day: false, start: props.eventToEdit.start, end: props.eventToEdit.end, organizer: userId['cc-user-id'], shifts:[]}, token['cc-token'])
     .then( resp => props.updateEvents(resp))
     .catch( error => console.log(error))
   }

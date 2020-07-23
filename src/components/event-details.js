@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import API from '../api-service'
 import { useCookies } from 'react-cookie'
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 import EventForm from './event-form';
 import '../styles/event-details.css';
 import Modal from 'react-awesome-modal';
@@ -13,6 +16,7 @@ import IconButton from '@material-ui/core/IconButton';
 function EventDetails(props) {
 
   const [ userId ] = useCookies(['cc-user-id']);
+  const [ token ] = useCookies(['cc-token']);
 
   const [ editFormVisible, setEditFormVisible ] = useState(false)
   const [ eventToEdit, setEventToEdit ] = useState(null);
@@ -32,7 +36,20 @@ function EventDetails(props) {
   }
 
   const onDeleteClick = () => {
-    alert('Are you sure you would like to delete this event?')
+    confirmAlert({
+      title: 'Confirm',
+      message: 'Are you sure you would like to delete this event?',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => API.deleteEvent(props.event.id, token['cc-token'], {organizer: userId['cc-user-id']})
+        },
+        {
+          label: 'No',
+          onClick: () => (console.log('closed'))
+        }
+      ]
+    })
   }
 
   const onEditClick = () => {
@@ -40,7 +57,7 @@ function EventDetails(props) {
   }
 
   return (
-    <div>
+    <div className='event-details'>
       { props.event ? 
         (<Modal visible={props.visible} width="400" height="300" effect="fadeInUp" onClickAway={() => closeDetails()}  className='event-details'>
           
