@@ -5,7 +5,7 @@ import { useCookies } from 'react-cookie'
 
 function EventForm(props) {
  
-  const [ token ] = useCookies(['mr-token']);
+  const [ token ] = useCookies(['cc-token']);
 
   const [ title, setTitle ] = useState('');
   const [ description, setDescription ] = useState('');

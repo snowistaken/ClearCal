@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { useCookies } from 'react-cookie'
 import EventForm from './event-form';
-import '../styles/event-details.css'
+import '../styles/event-details.css';
 import Modal from 'react-awesome-modal';
 import Fab from '@material-ui/core/Fab';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -11,7 +12,24 @@ import IconButton from '@material-ui/core/IconButton';
 
 function EventDetails(props) {
 
+  const [ userId ] = useCookies(['cc-user-id']);
+
   const [ editFormVisible, setEditFormVisible ] = useState(false)
+  const [ eventToEdit, setEventToEdit ] = useState(null);
+
+  const closeDetails = () => {
+    props.closeDetails()
+    setEventToEdit(null)
+  }
+
+  useEffect( () => {
+    setEventToEdit(props.event)
+    setEditFormVisible(false)
+  }, [props.event])
+
+  const updateEvents = (resp) => {
+    props.updateEvents(resp)
+  }
 
   const onDeleteClick = () => {
     alert('Are you sure you would like to delete this event?')
@@ -22,9 +40,9 @@ function EventDetails(props) {
   }
 
   return (
-    <div className='event-details'>
+    <div>
       { props.event ? 
-        (<Modal visible={props.visible} width="400" height="300" effect="fadeInUp" onClickAway={() => props.closeDetails()}>
+        (<Modal visible={props.visible} width="400" height="300" effect="fadeInUp" onClickAway={() => closeDetails()}  className='event-details'>
           
             <Tooltip text='Close'>
               <IconButton aria-label="close window" component="span" className='close-button' size='small' onClick={() => props.closeDetails()}>
@@ -35,27 +53,26 @@ function EventDetails(props) {
           <div style={{'margin-left': '15px'}}>
             <h3>Title: {props.event.title}</h3>
             <p>
+              {/* Organizer: {String(props.event.organizer)}<br/>
+              User ID: {String(userId['cc-user-id'])}<br/> */}
               From: {props.event.start.toString()}<br/>
               To: {props.event.end.toString()}<br/>
               Details: {props.event.description}<br/>
             </p>
           </div>
-
-          { editFormVisible ? 
-            <EventForm eventToEdit={props.event} updateEvents={props.updateEvents} />
-          : null
-          }
-
           {props.userView 
-          // && (props.event.id == )
-             ?
+          && String(userId['cc-user-id']) === String(props.event.organizer) ?
             (<div>
-              <Fab color="secondary" aria-label="edit" size='small' onClick={onEditClick}>
+              <Fab color="secondary" aria-label="edit" size='small' onClick={onEditClick} className='edit-button'>
                 <Edit />
               </Fab>
-              <Fab color='default' aria-label="edit" size='small' onClick={onDeleteClick}>
+              <Fab color='default' aria-label="edit" size='small' onClick={onDeleteClick} className='trash-button'>
                 <Delete />
               </Fab>
+              { editFormVisible ? 
+                <EventForm eventToEdit={eventToEdit} updateEvents={updateEvents} />
+                : null
+              }
             </div>) 
             : <></>}
 

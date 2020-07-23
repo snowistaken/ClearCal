@@ -7,6 +7,7 @@ import { useCookies } from 'react-cookie';
 function App() {
 
   const [ token ] = useCookies(['cc-token']);
+  const [ userId ] = useCookies(['cc-user-id']);
 
   const [ selectedEvent, setSelectedEvent ] = useState(null);
   const [ events, setEvents ] = useState([]);
@@ -42,7 +43,8 @@ function App() {
         description: event.title,
         allDay: false,
         start: new Date (event.start),
-        end: new Date (event.end)
+        end: new Date (event.end),
+        organizer: event.organizer
       })
     })
     console.log(formattedEvents)

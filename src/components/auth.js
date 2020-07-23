@@ -9,6 +9,7 @@ function Auth(){
   const [ isLoginView, setIsLoginView ] = useState(true);
 
   const [ token, setToken ] = useCookies(['cc-token']);
+  const [ userId, setUserId ] = useCookies(['cc-user-id']);
 
   useEffect( () => {
     console.log(token);
@@ -17,7 +18,10 @@ function Auth(){
 
   const loginClicked = () => {
     API.loginUser({username, password})
-    .then( resp => setToken('cc-token', resp.token))
+    .then( (resp) => {
+      setUserId('cc-user-id', resp.id)
+      setToken('cc-token', resp.token)
+    })
     .catch( error => console.log(error) )
   }
 

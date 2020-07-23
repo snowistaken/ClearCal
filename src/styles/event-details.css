@@ -1,9 +1,21 @@
 .event-details{
-  
+  overflow: hidden;
+  position: relative
 }
 
 .close-button{
   color: rgb(43, 43, 43) !important;
   background-color: rgba(220, 220, 220, 0.701) !important;
-  align-self: right !important;
+  position: fixed;
+  float: right;
+}
+
+.trash-button{
+  position: fixed;
+  float: right;
+}
+
+.edit-button{
+  position: fixed;
+  float: right;
 }
