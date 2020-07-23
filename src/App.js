@@ -6,8 +6,8 @@ import { useCookies } from 'react-cookie';
 
 function App() {
 
-  const [ token ] = useCookies(['cc-token']);
-  const [ userId ] = useCookies(['cc-user-id']);
+  const [ token, setToken, deleteToken ] = useCookies(['cc-token']);
+  const [ userId, setUserId, deleteUserId ] = useCookies(['cc-user-id']);
 
   const [ selectedEvent, setSelectedEvent ] = useState(null);
   const [ events, setEvents ] = useState([]);
@@ -71,7 +71,8 @@ function App() {
   }
 
   const logout = () => {
-    console.log('logout')
+    deleteToken(['cc-token']);
+    deleteUserId(['cc-user-id']);
   }
 
   const closeDetails = () => {

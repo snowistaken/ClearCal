@@ -16,7 +16,7 @@ function UserView(props) {
     // <React.Fragment className='App'>
       <div className='layout'>
         { token['cc-token'] ?
-          <Fab variant="extended" className='login' size='medium' onClick={props.login}>
+          <Fab variant="extended" className='login' size='medium' onClick={props.logout}>
             <SvgIcon />
               Logout
           </Fab>
