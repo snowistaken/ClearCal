@@ -3,7 +3,7 @@ import API from '../api-service'
 import { useCookies } from 'react-cookie'
 
 
-function Eventform(props) {
+function EventForm(props) {
  
   const [ token ] = useCookies(['mr-token']);
 
@@ -13,8 +13,9 @@ function Eventform(props) {
   const [ end, setEnd ] = useState('');
 
   useEffect( () => {
-    // setTitle(props.eventToEdit.title)
-    // setDescription(props.eventToEdit.description)
+    if (props.eventToEdit)
+      setTitle(props.eventToEdit.title)
+      setDescription(props.eventToEdit.description)
   }, [props.eventToEdit])
 
   const updateClicked = () => {
@@ -70,4 +71,4 @@ function Eventform(props) {
     )
 }
 
-export default Eventform;
+export default EventForm;

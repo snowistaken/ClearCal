@@ -24,7 +24,7 @@ function UserView(props) {
         </Fab>
       }
       <CalendarContainer setSelectedEvent={props.setSelectedEvent} openDetails={props.openDetails} events={props.events}/>
-      <EventDetails closeDetails={props.closeDetails} visible={props.visible} event={props.selectedEvent}></EventDetails>
+      <EventDetails userView={props.userView} closeDetails={props.closeDetails} visible={props.visible} event={props.selectedEvent}></EventDetails>
     </div>
   );
 }

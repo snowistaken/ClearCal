@@ -12,7 +12,7 @@ function Auth(){
 
   useEffect( () => {
     console.log(token);
-    if(token['cc-token']) window.location.href = '/calendar'
+    if(token['cc-token']) window.location.href = '/'
   }, [token])
 
   const loginClicked = () => {

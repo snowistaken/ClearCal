@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import UserView from './components/user-view';
-import StandardView from './components/user-view';
+import StandardView from './components/standard-view';
 import { useCookies } from 'react-cookie';
 
 function App() {
@@ -11,6 +11,7 @@ function App() {
   const [ selectedEvent, setSelectedEvent ] = useState(null);
   const [ events, setEvents ] = useState([]);
   const [ visible, setVisible ] = useState(false)
+  const [ userView, setUserView ] = useState(false)
 
   useEffect(() => {
     fetch("http://127.0.0.1:8000/api/events/", {
@@ -25,8 +26,12 @@ function App() {
   }, [])
 
   useEffect( () => {
-    console.log(token);
-    // if(!token['mr-token']) window.location.href = '/';
+
+    if (token['cc-token'])
+      setUserView(true)
+    else
+      setUserView(false);
+  
   }, [token])
 
   const formatEvents = (events) => {
@@ -44,7 +49,7 @@ function App() {
     setEvents(formattedEvents)
   }
 
-  const updateEvents = newEvent => {
+  const updateEvents = (newEvent) => {
     const newEvents = events.map( oldEvent => {
       if (oldEvent.id === newEvent.id) {
         return newEvent;
@@ -107,10 +112,10 @@ function App() {
     // </React.Fragment>
 
     <div>
-      { token['cc-token'] ?
-        (<UserView setSelectedEvent={setSelectedEvent} selectedEvent={selectedEvent} events={events} visible={visible} updateEvents={updateEvents} createEvent={createEvent} login={login} logout={logout} closeDetails={closeDetails} openDetails={openDetails} eventCreated={eventCreated} />)
+      { userView ?
+        (<UserView setSelectedEvent={setSelectedEvent} selectedEvent={selectedEvent} events={events} visible={visible} updateEvents={updateEvents} createEvent={createEvent} login={login} logout={logout} closeDetails={closeDetails} openDetails={openDetails} eventCreated={eventCreated} userView={userView} />)
         :
-        (<StandardView setSelectedEvent={setSelectedEvent} selectedEvent={selectedEvent} events={events} visible={visible} updateEvents={updateEvents} createEvent={createEvent} login={login} logout={logout} closeDetails={closeDetails} openDetails={openDetails} eventCreated={eventCreated} />)
+        (<StandardView setSelectedEvent={setSelectedEvent} selectedEvent={selectedEvent} events={events} visible={visible} updateEvents={updateEvents} createEvent={createEvent} login={login} logout={logout} closeDetails={closeDetails} openDetails={openDetails} eventCreated={eventCreated} userView={userView} />)
       }
     </div>
   );
