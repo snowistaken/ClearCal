@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
-import API from '../api-service'
-import { useCookies } from 'react-cookie'
+import React, { useState, useEffect } from 'react';
+import API from '../api-service';
+import { useCookies } from 'react-cookie';
 
 function Auth(){
 
@@ -13,7 +13,7 @@ function Auth(){
   useEffect( () => {
     console.log(token);
     if(token['cc-token']) window.location.href = '/'
-  }, [token])
+  }, [token]);
 
   const loginClicked = () => {
     API.loginUser({username, password})
@@ -22,7 +22,7 @@ function Auth(){
       setToken('cc-token', resp.token)
     })
     .catch( error => console.log(error) )
-  }
+  };
 
   return (
     <div>
@@ -37,7 +37,7 @@ function Auth(){
         onChange={ evt => setPassword(evt.target.value) } /><br/>
         <button onClick={loginClicked}>Login</button>
     </div>
-  )
-}
+  );
+};
 
 export default Auth;

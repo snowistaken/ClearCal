@@ -24,11 +24,11 @@ function UserView(props) {
           <SvgIcon />
             Login
         </Fab>
-      }
+      };
       <CalendarContainer setSelectedEvent={props.setSelectedEvent} openDetails={props.openDetails} events={props.events}/>
       <EventDetails userView={props.userView} closeDetails={props.closeDetails} visible={props.visible} event={props.selectedEvent}></EventDetails>
     </div>
   );
-}
+};
 
 export default UserView;

@@ -17,22 +17,22 @@ function EventDetails(props) {
   const [ userId ] = useCookies(['cc-user-id']);
   const [ token ] = useCookies(['cc-token']);
 
-  const [ editFormVisible, setEditFormVisible ] = useState(false)
+  const [ editFormVisible, setEditFormVisible ] = useState(false);
   const [ eventToEdit, setEventToEdit ] = useState(null);
 
   const closeDetails = () => {
     props.closeDetails()
     setEventToEdit(null)
-  }
+  };
 
   useEffect( () => {
     setEventToEdit(props.event)
     setEditFormVisible(false)
-  }, [props.event])
+  }, [props.event]);
 
   const updateEvents = (resp) => {
     props.updateEvents(resp)
-  }
+  };
 
   const onDeleteClick = () => {
     confirmAlert({
@@ -49,11 +49,11 @@ function EventDetails(props) {
         }
       ]
     })
-  }
+  };
 
   const onEditClick = () => {
     setEditFormVisible(true)
-  }
+  };
 
   return (
     <div className='event-details' style={{width: '0px'}} >
@@ -84,14 +84,14 @@ function EventDetails(props) {
               { editFormVisible ? 
                 <EventForm eventToEdit={eventToEdit} updateEvents={updateEvents} />
                 : null
-              }
+              };
             </div>) 
             : <></>}
         </Modal>) 
         : null
-      }
+      };
     </div>
-  )
-}
+  );
+};
 
-export default EventDetails
+export default EventDetails;

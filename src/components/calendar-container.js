@@ -5,12 +5,12 @@ import moment from 'moment';
 
 
 function CalendarContainer(props) {
-  const localizer = momentLocalizer(moment)
+  const localizer = momentLocalizer(moment);
 
   const onSelectedEvent = selectedEvent => {
     props.setSelectedEvent(selectedEvent)
     props.openDetails(true)
-  }
+  };
 
   return (
       <Calendar
@@ -23,8 +23,8 @@ function CalendarContainer(props) {
         onSelectEvent={event => onSelectedEvent(event)}
         className='calendar'
       />
-  )
-}
+  );
+};
 
 // const localizer = momentLocalizer(moment)
 
@@ -76,4 +76,4 @@ function CalendarContainer(props) {
 
 // Selectable.propTypes = propTypes
 
-export default CalendarContainer
+export default CalendarContainer;

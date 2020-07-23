@@ -21,20 +21,20 @@ function EventForm(props) {
       {setTitle(props.eventToEdit.title)
       setDescription(props.eventToEdit.description)};
 
-  }, [props.eventToEdit])
+  }, [props.eventToEdit]);
 
   const updateClicked = () => {
     API.updateEvent(props.eventToEdit.id, {title: title, description: description, all_day: false, start: props.eventToEdit.start, end: props.eventToEdit.end, organizer: userId['cc-user-id'], shifts:[]}, token['cc-token'])
     .then( resp => props.updateEvents(resp))
     .catch( error => console.log(error))
-  }
+  };
 
   const createClicked = () => {
     API.createEvent({title, description, all_day: false, start, end, organizer: '1', shifts:[]}, token['cc-token'])
     .then( resp => console.log(resp))
     .then( window.location.href = '/' )
     .catch( error => console.log(error))
-  }
+  };
 
   return (
     <div>
@@ -73,7 +73,7 @@ function EventForm(props) {
         </div>
       }
       </div>
-    )
-}
+    );
+};
 
 export default EventForm;

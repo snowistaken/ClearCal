@@ -21,7 +21,7 @@ function UserView(props) {
     })
     props.setEvents(newEvents)
     props.setSelectedEvent(null)
-  }
+  };
 
   return (
       <div className='layout'>
@@ -37,7 +37,7 @@ function UserView(props) {
             <SvgIcon />
               Login
           </Fab>
-        }
+        };
         <Tooltip title='Create Event'>
           <Fab color="primary" aria-label="add" className='calendar-buttons' size='medium' onClick={props.createEvent}>
             <AddIcon />
@@ -47,6 +47,6 @@ function UserView(props) {
         <EventDetails updateEvents={updateEvents} userView={props.userView} closeDetails={props.closeDetails} visible={props.visible} event={props.selectedEvent}></EventDetails>
       </div>
   );
-}
+};
 
 export default UserView;
