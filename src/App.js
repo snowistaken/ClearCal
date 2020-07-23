@@ -51,17 +51,6 @@ function App() {
     setEvents(formattedEvents)
   }
 
-  const updateEvents = (newEvent) => {
-    const newEvents = events.map( oldEvent => {
-      if (oldEvent.id === newEvent.id) {
-        return newEvent;
-      }
-      return oldEvent;
-    })
-    setEvents(newEvents)
-    setSelectedEvent(null)
-  }
-
   const createEvent = () => {
     window.location.href = '/create-event'
   }
@@ -116,9 +105,9 @@ function App() {
 
     <div>
       { userView ?
-        (<UserView setSelectedEvent={setSelectedEvent} selectedEvent={selectedEvent} events={events} visible={visible} updateEvents={updateEvents} createEvent={createEvent} login={login} logout={logout} closeDetails={closeDetails} openDetails={openDetails} eventCreated={eventCreated} userView={userView} />)
+        (<UserView setEvents={setEvents} setSelectedEvent={setSelectedEvent} selectedEvent={selectedEvent} events={events} visible={visible} createEvent={createEvent} login={login} logout={logout} closeDetails={closeDetails} openDetails={openDetails} eventCreated={eventCreated} userView={userView} />)
         :
-        (<StandardView setSelectedEvent={setSelectedEvent} selectedEvent={selectedEvent} events={events} visible={visible} updateEvents={updateEvents} createEvent={createEvent} login={login} logout={logout} closeDetails={closeDetails} openDetails={openDetails} eventCreated={eventCreated} userView={userView} />)
+        (<StandardView setSelectedEvent={setSelectedEvent} selectedEvent={selectedEvent} events={events} visible={visible} createEvent={createEvent} login={login} logout={logout} closeDetails={closeDetails} openDetails={openDetails} eventCreated={eventCreated} userView={userView} />)
       }
     </div>
   );

@@ -12,6 +12,17 @@ function UserView(props) {
 
   const [ token ] = useCookies(['cc-token']);
 
+  const updateEvents = (newEvent) => {
+    const newEvents = props.events.map( oldEvent => {
+      if (oldEvent.id === newEvent.id) {
+        return newEvent;
+      }
+      return oldEvent;
+    })
+    props.setEvents(newEvents)
+    props.setSelectedEvent(null)
+  }
+
   return (
     // <React.Fragment className='App'>
       <div className='layout'>
@@ -33,7 +44,7 @@ function UserView(props) {
           </Fab>
         </Tooltip>
         <CalendarContainer setSelectedEvent={props.setSelectedEvent} openDetails={props.openDetails} events={props.events}/>
-        <EventDetails userView={props.userView} closeDetails={props.closeDetails} visible={props.visible} event={props.selectedEvent}></EventDetails>
+        <EventDetails updateEvents={updateEvents} userView={props.userView} closeDetails={props.closeDetails} visible={props.visible} event={props.selectedEvent}></EventDetails>
       </div>
     // </React.Fragment>
   );
